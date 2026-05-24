@@ -36,12 +36,13 @@ function generateCard(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.drawImage(img,0,0);
   if(name){
-    ctx.font='bold 72px Arial';
+    ctx.font='bold 72px Arial, Tahoma';
     ctx.fillStyle='#ffffff';
     ctx.textAlign='center';
     ctx.direction='rtl';
-    // توسيط الاسم في المربع الأحمر
-    ctx.fillText(name, canvas.width/2, canvas.height/2 + 20);
+    const rectCenterY = canvas.height * 0.82;
+    const maxWidth = canvas.width * 0.75;
+    ctx.fillText(name, canvas.width / 2, rectCenterY, maxWidth);
   }
 }
 
