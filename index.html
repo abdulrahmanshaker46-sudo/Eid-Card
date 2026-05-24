@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بطاقة تهنئة عيد الأضحى</title>
+<style>
+body{font-family:Arial,Tahoma,sans-serif;background:#f4f1ea;text-align:center;margin:0;padding:20px}
+.container{max-width:520px;margin:auto;background:white;padding:18px;border-radius:16px;box-shadow:0 4px 18px #0002}
+input{width:90%;padding:14px;font-size:18px;border:1px solid #ccc;border-radius:10px;margin:10px 0;text-align:center}
+button{background:#6b4b2a;color:white;border:0;padding:13px 22px;border-radius:10px;font-size:17px;cursor:pointer;margin:5px}
+canvas{max-width:100%;border-radius:12px;margin-top:12px}
+.note{font-size:13px;color:#666}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>بطاقة تهنئة عيد الأضحى</h2>
+<p>اكتب الاسم ثم اضغط إنشاء الصورة</p>
+<input id="nameInput" placeholder="اكتب الاسم هنا">
+<br>
+<button onclick="generateCard()">إنشاء الصورة</button>
+<button onclick="downloadCard()">تحميل البطاقة</button>
+<canvas id="cardCanvas"></canvas>
+<p class="note">يمكنك مشاركة هذا الرابط بعد رفع الملف على Netlify.</p>
+</div>
+<script>
+const canvas=document.getElementById('cardCanvas');
+const ctx=canvas.getContext('2d');
+const img=new Image();
+img.src='card.jpeg';
+img.onload=()=>{canvas.width=img.width;canvas.height=img.height;ctx.drawImage(img,0,0);};
+
+function generateCard(){
+  const name=document.getElementById('nameInput').value.trim();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(img,0,0);
+  if(name){
+    ctx.font='bold 72px Arial';
+    ctx.fillStyle='#ffffff';
+    ctx.textAlign='center';
+    ctx.direction='rtl';
+    // توسيط الاسم في المربع الأحمر
+    ctx.fillText(name, canvas.width/2, canvas.height/2 + 20);
+  }
+}
+
+function downloadCard(){
+  generateCard();
+  const link=document.createElement('a');
+  link.download='eid-adha-card.png';
+  link.href=canvas.toDataURL('image/png');
+  link.click();
+}
+</script>
+</body>
+</html>
