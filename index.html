@@ -28,6 +28,7 @@ canvas{max-width:100%;border-radius:12px;margin-top:12px}
 const canvas=document.getElementById('cardCanvas');
 const ctx=canvas.getContext('2d');
 const img=new Image();
+const rectCenterY = 1240;
 img.src='card.jpeg';
 img.onload=()=>{canvas.width=img.width;canvas.height=img.height;ctx.drawImage(img,0,0);};
 
@@ -41,7 +42,7 @@ function generateCard(){
     ctx.textAlign='center';
     ctx.direction='rtl';
     // توسيط الاسم في المربع الأحمر
-    ctx.fillText(name, canvas.width/2, canvas.height/2 + 20);
+    ctx.fillText(name, canvas.width/2, rectCenterY);
   }
 }
 
